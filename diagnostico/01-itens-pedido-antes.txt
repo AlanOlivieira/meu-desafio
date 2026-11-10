@@ -1,0 +1,20 @@
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=18367.94..18367.95 rows=4 width=20) (actual time=5013.224..5020.618 rows=3 loops=1)
+   Sort Key: id
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=8982 read=576
+   ->  Gather  (cost=1000.00..18367.90 rows=4 width=20) (actual time=5010.529..5017.926 rows=3 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=8979 read=576
+         ->  Parallel Seq Scan on itens_pedido  (cost=0.00..17367.50 rows=2 width=20) (actual time=3968.954..4933.505 rows=1 loops=3)
+               Filter: (pedido_id = 7)
+               Rows Removed by Filter: 499999
+               Buffers: shared hit=8979 read=576
+ Planning:
+   Buffers: shared hit=73
+ Planning Time: 50.027 ms
+ Execution Time: 5030.303 ms
+(16 rows)
+
