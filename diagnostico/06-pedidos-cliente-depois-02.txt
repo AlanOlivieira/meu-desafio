@@ -1,0 +1,11 @@
+                                                                QUERY PLAN                                                                
+------------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using idx_pedidos_cliente_criado_id on pedidos  (cost=0.42..24.51 rows=5 width=299) (actual time=0.532..0.932 rows=5 loops=1)
+   Index Cond: (cliente_id = 7)
+   Buffers: shared hit=8
+ Planning:
+   Buffers: shared hit=108
+ Planning Time: 11.030 ms
+ Execution Time: 2.199 ms
+(7 rows)
+

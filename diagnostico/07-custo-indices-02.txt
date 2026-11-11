@@ -1,0 +1,6 @@
+            indice             |  bytes   | tamanho 
+-------------------------------+----------+---------
+ idx_itens_pedido_pedido_id_id | 33718272 | 32 MB
+ idx_pedidos_cliente_criado_id | 20299776 | 19 MB
+(2 rows)
+
