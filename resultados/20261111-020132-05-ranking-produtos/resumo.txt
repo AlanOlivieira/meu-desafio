@@ -1,0 +1,17 @@
+Medição: 05-ranking-produtos
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        274
+Requisições/s:      4.13
+Tempo de resposta:  mediana 1802.0 ms | p95 17109.9 ms | p99 33234.7 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               71        97.7 ms       302.0 ms      509.8 ms      0.0%    
+cliente-por-email     43        2087.7 ms     4594.0 ms     5664.8 ms     0.0%    
+pedidos-do-cliente    55        8373.4 ms     14456.8 ms    15187.9 ms    0.0%    
+pedidos-por-status    36        3195.3 ms     11879.5 ms    13111.2 ms    0.0%    
+busca-produtos        47        1086.1 ms     1995.8 ms     2213.9 ms     0.0%    
+vendas-por-dia        19        19431.0 ms    34630.7 ms    35547.3 ms    0.0%    
+top-produtos          3         23222.4 ms    50532.0 ms    52959.6 ms    0.0%    
