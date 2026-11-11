@@ -1,0 +1,38 @@
+                                                                                     QUERY PLAN                                                                                     
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=11228.99..11229.00 rows=1 width=8) (actual time=46.765..85.577 rows=1 loops=1)
+   Buffers: shared hit=3 read=1481
+   ->  Gather  (cost=11228.78..11228.99 rows=2 width=8) (actual time=46.662..85.568 rows=3 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=3 read=1481
+         ->  Partial Aggregate  (cost=10228.78..10228.79 rows=1 width=8) (actual time=43.227..43.227 rows=1 loops=3)
+               Buffers: shared hit=3 read=1481
+               ->  Parallel Index Only Scan using idx_pedidos_status_criado_id on pedidos  (cost=0.42..9918.26 rows=124208 width=0) (actual time=0.353..38.917 rows=100000 loops=3)
+                     Index Cond: (status = 'pago'::text)
+                     Heap Fetches: 0
+                     Buffers: shared hit=3 read=1481
+ Planning:
+   Buffers: shared hit=87 read=12
+ Planning Time: 1.001 ms
+ Execution Time: 86.252 ms
+(16 rows)
+
+                                                                        QUERY PLAN                                                                         
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=1466.71..1472.59 rows=20 width=300) (actual time=25.111..25.137 rows=20 loops=1)
+   Buffers: shared hit=4609 read=418
+   ->  Index Scan using idx_pedidos_status_criado_id on pedidos  (cost=0.42..87771.29 rows=298100 width=300) (actual time=0.105..24.729 rows=5000 loops=1)
+         Index Cond: (status = 'pago'::text)
+         Buffers: shared hit=4609 read=418
+ Planning:
+   Buffers: shared hit=32 read=3
+ Planning Time: 1.105 ms
+ Execution Time: 25.179 ms
+(9 rows)
+
+ indice_bytes | indice_tamanho 
+--------------+----------------
+     22118400 | 21 MB
+(1 row)
+
