@@ -1,0 +1,17 @@
+Medição: 07-pedidos-em-lote
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        337
+Requisições/s:      5.19
+Tempo de resposta:  mediana 1642.3 ms | p95 13337.7 ms | p99 19728.5 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               89        95.3 ms       206.4 ms      414.6 ms      0.0%    
+cliente-por-email     50        2508.0 ms     4609.0 ms     5052.0 ms     0.0%    
+pedidos-do-cliente    70        7753.5 ms     13574.3 ms    18480.0 ms    0.0%    
+pedidos-por-status    45        2395.3 ms     10912.3 ms    14260.8 ms    0.0%    
+busca-produtos        55        698.6 ms      1827.6 ms     3097.5 ms     0.0%    
+vendas-por-dia        23        8212.7 ms     16354.1 ms    17969.4 ms    0.0%    
+top-produtos          5         20985.9 ms    28902.0 ms    29766.3 ms    0.0%    
