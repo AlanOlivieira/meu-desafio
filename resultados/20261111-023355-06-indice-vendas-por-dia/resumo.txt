@@ -1,0 +1,17 @@
+Medição: 06-indice-vendas-por-dia
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        336
+Requisições/s:      5.24
+Tempo de resposta:  mediana 1392.3 ms | p95 15704.2 ms | p99 26822.4 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               90        96.0 ms       308.5 ms      404.2 ms      0.0%    
+cliente-por-email     49        1804.6 ms     3296.0 ms     4301.5 ms     0.0%    
+pedidos-do-cliente    64        6748.5 ms     14731.6 ms    18715.4 ms    0.0%    
+pedidos-por-status    50        2601.9 ms     11629.6 ms    20089.4 ms    0.0%    
+busca-produtos        58        803.1 ms      1723.7 ms     1970.2 ms     0.0%    
+vendas-por-dia        21        14147.4 ms    23356.7 ms    27108.2 ms    0.0%    
+top-produtos          4         28301.7 ms    42105.8 ms    43863.0 ms    0.0%    
