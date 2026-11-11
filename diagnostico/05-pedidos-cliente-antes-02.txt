@@ -1,0 +1,22 @@
+                                                            QUERY PLAN                                                            
+----------------------------------------------------------------------------------------------------------------------------------
+ Gather Merge  (cost=24438.20..24438.67 rows=4 width=301) (actual time=4613.333..4623.484 rows=5 loops=1)
+   Workers Planned: 2
+   Workers Launched: 2
+   Buffers: shared hit=10073 read=10887
+   ->  Sort  (cost=23438.18..23438.18 rows=2 width=301) (actual time=4545.836..4545.838 rows=2 loops=3)
+         Sort Key: criado_em DESC, id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=10073 read=10887
+         Worker 0:  Sort Method: quicksort  Memory: 25kB
+         Worker 1:  Sort Method: quicksort  Memory: 25kB
+         ->  Parallel Seq Scan on pedidos  (cost=0.00..23438.17 rows=2 width=301) (actual time=2940.414..4544.996 rows=2 loops=3)
+               Filter: (cliente_id = 7)
+               Rows Removed by Filter: 166665
+               Buffers: shared hit=9947 read=10887
+ Planning:
+   Buffers: shared hit=84
+ Planning Time: 28.456 ms
+ Execution Time: 4628.172 ms
+(18 rows)
+
