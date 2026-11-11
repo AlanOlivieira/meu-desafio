@@ -1,0 +1,29 @@
+                                                                          QUERY PLAN                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Gather  (cost=1031.90..20853.86 rows=6747 width=297) (actual time=1.351..17.047 rows=12945 loops=1)
+   Workers Planned: 1
+   Workers Launched: 1
+   Buffers: shared hit=18322
+   ->  Nested Loop  (cost=31.90..19179.16 rows=3969 width=297) (actual time=0.568..11.188 rows=6472 loops=2)
+         Buffers: shared hit=18322
+         ->  Parallel Bitmap Heap Scan on pedidos p  (cost=31.47..6548.31 rows=1323 width=289) (actual time=0.542..3.901 rows=2156 loops=2)
+               Recheck Cond: (((criado_em)::date >= '2024-01-01'::date) AND ((criado_em)::date <= '2024-01-07'::date) AND (status <> 'cancelado'::text))
+               Heap Blocks: exact=560
+               Buffers: shared hit=995
+               ->  Bitmap Index Scan on idx_pedidos_dia_nao_cancelado  (cost=0.00..30.91 rows=2249 width=0) (actual time=0.878..0.878 rows=4313 loops=1)
+                     Index Cond: (((criado_em)::date >= '2024-01-01'::date) AND ((criado_em)::date <= '2024-01-07'::date))
+                     Buffers: shared hit=6
+         ->  Index Scan using idx_itens_pedido_pedido_id_id on itens_pedido i  (cost=0.43..9.52 rows=3 width=12) (actual time=0.002..0.003 rows=3 loops=4313)
+               Index Cond: (pedido_id = p.id)
+               Buffers: shared hit=17327
+ Planning:
+   Buffers: shared hit=322
+ Planning Time: 1.274 ms
+ Execution Time: 17.596 ms
+(20 rows)
+
+ indice_bytes | indice_tamanho 
+--------------+----------------
+      3252224 | 3176 kB
+(1 row)
+
