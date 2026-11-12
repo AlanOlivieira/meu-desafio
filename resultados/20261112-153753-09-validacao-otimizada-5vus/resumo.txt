@@ -1,0 +1,17 @@
+Medição: 09-validacao-otimizada-5vus
+Carga: 5 usuários virtuais por 60s
+
+Requisições:        457
+Requisições/s:      7.45
+Tempo de resposta:  mediana 506.8 ms | p95 1627.4 ms | p99 5327.8 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               109       57.7 ms       193.4 ms      326.5 ms      0.0%    
+cliente-por-email     66        780.4 ms      1099.2 ms     1238.5 ms     0.0%    
+pedidos-do-cliente    99        991.8 ms      1724.2 ms     2309.4 ms     0.0%    
+pedidos-por-status    74        481.3 ms      2096.8 ms     3045.4 ms     0.0%    
+busca-produtos        67        298.3 ms      506.8 ms      627.0 ms      0.0%    
+vendas-por-dia        35        640.5 ms      1676.0 ms     2016.0 ms     0.0%    
+top-produtos          7         5554.5 ms     7993.4 ms     8197.2 ms     0.0%    
