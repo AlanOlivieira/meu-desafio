@@ -1,0 +1,17 @@
+Medição: 08-validacao-original-20vus
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        120
+Requisições/s:      1.52
+Tempo de resposta:  mediana 2651.1 ms | p95 44433.8 ms | p99 54799.8 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               38        550.0 ms      1297.0 ms     1842.4 ms     0.0%    
+cliente-por-email     19        2752.4 ms     3673.7 ms     4170.0 ms     0.0%    
+pedidos-do-cliente    23        36643.3 ms    53449.4 ms    54768.6 ms    0.0%    
+pedidos-por-status    15        14133.6 ms    22361.1 ms    23428.6 ms    0.0%    
+busca-produtos        15        1356.7 ms     2270.2 ms     3170.2 ms     0.0%    
+vendas-por-dia        9         23219.1 ms    25746.1 ms    26193.5 ms    0.0%    
+top-produtos          1         56065.3 ms    56065.3 ms    56065.3 ms    0.0%    

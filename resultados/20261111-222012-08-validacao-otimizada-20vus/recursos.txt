@@ -1,0 +1,5 @@
+container                            amostras  cpu_media    cpu_max    mem_media      mem_max
+desafio-validacao-otimizada-banco-1        38      96.1%     100.0%    420.9 MiB    460.3 MiB
+desafio-validacao-otimizada-api-1          38      22.7%       7.5%     49.5 MiB     66.0 MiB
+
+cpu_percentual: 100% = 1 CPU inteira.

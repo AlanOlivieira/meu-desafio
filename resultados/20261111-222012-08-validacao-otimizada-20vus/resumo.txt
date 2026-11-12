@@ -1,0 +1,17 @@
+Medição: 08-validacao-otimizada-20vus
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        232
+Requisições/s:      3.09
+Tempo de resposta:  mediana 2831.3 ms | p95 21791.8 ms | p99 31818.0 ms
+Erros:              0.43%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               58        160.8 ms      436.0 ms      572.6 ms      0.0%    
+cliente-por-email     37        3135.7 ms     4656.8 ms     5135.8 ms     0.0%    
+pedidos-do-cliente    48        9638.0 ms     15866.5 ms    17472.5 ms    0.0%    
+pedidos-por-status    28        6911.0 ms     15096.8 ms    16935.9 ms    0.0%    
+busca-produtos        41        1264.6 ms     2039.2 ms     2372.3 ms     0.0%    
+vendas-por-dia        16        21836.2 ms    31712.4 ms    31856.4 ms    0.0%    
+top-produtos          4         29835.7 ms    56242.9 ms    59230.8 ms    25.0%   
