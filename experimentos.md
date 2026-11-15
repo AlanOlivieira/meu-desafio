@@ -1,6 +1,6 @@
 # Registro dos experimentos
 
-Este registro reúne os experimentos realizados entre 10 e 12 de novembro de 2026, com as medições e as evidências de cada mudança.
+Este registro reúne os experimentos realizados entre 10 e 14 de novembro de 2026, com as medições e as evidências de cada mudança.
 
 Os números deste documento vêm dos arquivos originais de `resultados/` ou, quando indicado, dos diagnósticos salvos em `diagnostico/`. Os arquivos gerados pela régua foram preservados. As medianas selecionam o valor central das execuções de cada grupo e preservam a precisão dos resumos.
 
@@ -20,7 +20,7 @@ Os números deste documento vêm dos arquivos originais de `resultados/` ou, qua
 - A validação de 40 usuários virtuais mediu os mesmos commits em três pares alternados. Os 36 arquivos das seis rodadas estão em `e88764c`.
 - As rodadas usaram `DURACAO=60s`, `AQUECIMENTO=15s` e `SEMENTE=42`. A concorrência foi de 20 usuários virtuais nos experimentos E0 a E7 e na validação principal, de 5 no cenário de menor concorrência e de 40 no de maior concorrência.
 - Todos os arquivos `contexto.txt` registram `arquivos alterados sem commit: 0`.
-- Os limites permaneceram iguais: banco com `1` CPU e `536870912` bytes de memória; API com `0.5` CPU e `268435456` bytes de memória.
+- Nos ensaios E0 a E7 e na validação, o banco teve limite de 1 CPU e 512 MiB, e a API teve limite de 0,5 CPU e 256 MiB.
 - Todos os arquivos `contrato.txt` confirmam as mesmas `42` respostas do contrato original.
 - A conferência dos ZIPs confirmou a preservação das medições anteriores, do contrato, dos scripts, da carga e dos SQLs originais. A reversão retirou `banco/04-indice-pedidos-cliente.sql` da referência na tomada, que voltou à configuração de E1. O ZIP de E3 preserva o conteúdo dos arquivos anteriores, com a alteração em `api/src/db.js`. A comparação dos ZIPs de E3 e E4 confirmou a preservação byte a byte dos 130 arquivos de projeto e evidência anteriores. A comparação entre E4 e E5 encontrou a alteração prevista em `api/src/rotas.js` e preservação byte a byte dos demais arquivos anteriores. A comparação de E5 com E6 confirmou a preservação byte a byte dos 171 arquivos anteriores de código e evidência. Na comparação entre E6 e E7, dos 192 arquivos anteriores, a alteração de conteúdo foi em `api/src/rotas.js`.
 - E1 acrescentou somente `banco/03-indice-itens-pedido.sql` à configuração de desempenho. E2 acrescentou somente `banco/04-indice-pedidos-cliente.sql` a E1. Os demais acréscimos foram evidências de diagnóstico e medição.
@@ -320,6 +320,44 @@ Nos três níveis, o uso médio de memória aumentou nos dois serviços e o de C
 As séries foram executadas em blocos por nível, com o cenário de 20 usuários virtuais na sessão anterior à de 5 e 40. Os efeitos de temperatura, cache e outros processos do notebook podem variar entre blocos. As diferenças de desempenho reportadas são comparações entre versões dentro do mesmo nível de carga.
 
 O código otimizado avaliado está em `5c692fc`. A busca em lote de E7, introduzida em `fc49dd2`, foi revertida em `8e6efb0`. Após a reversão, `git diff --stat 5c692fc -- api banco docker-compose.yml carga scripts contrato` retornou sem diferenças nos arquivos comparados.
+
+## Ensaios complementares com 20 usuários virtuais
+
+Em 14 de novembro de 2026, a configuração escolhida (`5c692fc`) foi medida novamente. O commit `70042d9` acrescenta o índice GIN com `pg_trgm`. O commit `4678071` reduz apenas o limite da API de `0,5` para `0,4 CPU`. Cada variante usa a referência do mesmo ensaio.
+
+As nove rodadas usaram 20 usuários virtuais, 15 s de aquecimento, 60 s de carga e semente 42. A ordem alternou em três blocos. As três configurações tiveram as mesmas cotas do banco e de memória da API. Os nove contextos confirmam o commit medido e zero alterações sem commit. Todas as rodadas registraram zero erros durante a carga e preservaram as 42 respostas.
+
+| Mudança | Fonte | Status | Antes e depois pelas medianas | Resultados e conclusão |
+|---|---|---|---|---|
+| GIN na busca | [PostgreSQL 16, pg_trgm](https://www.postgresql.org/docs/16/pgtrgm.html) | Aplicada e medida. Ficou fora da configuração escolhida. | Vazão de 6,82 para 4,84 req/s. p95 geral de 9.632,3 para 11.394,7 ms. p95 da busca de 1.743,5 para 893,1 ms. | [Rodadas](#rodadas-complementares). A busca melhorou pela mediana e a vazão geral foi menor nos três blocos. A causa da diferença geral ficou em aberto. |
+| Cota de `0,4 CPU` na API | [Limites no Docker Compose](https://docs.docker.com/reference/compose-file/deploy/#resources) | Aplicada e medida. Ficou fora da configuração escolhida. | Vazão de 6,82 para 4,24 req/s. p95 geral de 9.632,3 para 14.353,2 ms. | [Rodadas](#rodadas-complementares). A cota menor teve menor vazão mediana e maior p95 geral. O terceiro bloco ficou próximo da referência, com 6,81 contra 6,91 req/s. |
+
+### Rodadas complementares
+
+| Bloco | Configuração | Commit | Vazão (req/s) | p95 geral (ms) | p95 da busca (ms) | Arquivos |
+|---:|---|---|---:|---:|---:|---|
+| 1 | Referência | `5c692fc` | 5,92 | 10472,6 | 1730,4 | [Resumo](resultados/20261114-220214-11-referencia-otimizada-20vus/resumo.txt) · [Contrato](resultados/20261114-220214-11-referencia-otimizada-20vus/contrato.txt) |
+| 1 | GIN | `70042d9` | 3,73 | 16823,7 | 2243,5 | [Resumo](resultados/20261114-220612-11-gin-produtos-20vus/resumo.txt) · [Contrato](resultados/20261114-220612-11-gin-produtos-20vus/contrato.txt) |
+| 1 | API com 0,4 CPU | `4678071` | 4,10 | 14902,4 | 2367,4 | [Resumo](resultados/20261114-221105-12-cota-api-04-20vus/resumo.txt) · [Contrato](resultados/20261114-221105-12-cota-api-04-20vus/contrato.txt) |
+| 2 | GIN | `70042d9` | 4,84 | 11394,7 | 893,1 | [Resumo](resultados/20261114-221354-11-gin-produtos-20vus/resumo.txt) · [Contrato](resultados/20261114-221354-11-gin-produtos-20vus/contrato.txt) |
+| 2 | API com 0,4 CPU | `4678071` | 4,24 | 14353,2 | 2801,0 | [Resumo](resultados/20261114-221644-12-cota-api-04-20vus/resumo.txt) · [Contrato](resultados/20261114-221644-12-cota-api-04-20vus/contrato.txt) |
+| 2 | Referência | `5c692fc` | 6,82 | 9033,9 | 2144,9 | [Resumo](resultados/20261114-221926-11-referencia-otimizada-20vus/resumo.txt) · [Contrato](resultados/20261114-221926-11-referencia-otimizada-20vus/contrato.txt) |
+| 3 | API com 0,4 CPU | `4678071` | 6,81 | 9244,1 | 2056,5 | [Resumo](resultados/20261114-222134-12-cota-api-04-20vus/resumo.txt) · [Contrato](resultados/20261114-222134-12-cota-api-04-20vus/contrato.txt) |
+| 3 | Referência | `5c692fc` | 6,91 | 9632,3 | 1743,5 | [Resumo](resultados/20261114-222343-11-referencia-otimizada-20vus/resumo.txt) · [Contrato](resultados/20261114-222343-11-referencia-otimizada-20vus/contrato.txt) |
+| 3 | GIN | `70042d9` | 6,45 | 10282,6 | 706,4 | [Resumo](resultados/20261114-222556-11-gin-produtos-20vus/resumo.txt) · [Contrato](resultados/20261114-222556-11-gin-produtos-20vus/contrato.txt) |
+
+### Recursos e planos dos ensaios complementares
+
+Os valores são medianas das médias das três rodadas. A CPU é expressa em % de um núcleo. As médias reproduziram o resumo quando foram usadas as primeiras amostras do CSV até a contagem de `recursos.txt`. O campo `cpu_max` apresentou inconsistências, incluindo valores abaixo da média da API.
+
+| Configuração | CPU banco (%) | Memória banco (MiB) | CPU API (%) | Memória API (MiB) |
+|---|---:|---:|---:|---:|
+| Referência | 98,8 | 340,0 | 19,9 | 42,2 |
+| GIN | 97,2 | 322,7 | 21,7 | 45,0 |
+| API com 0,4 CPU | 96,5 | 305,5 | 21,7 | 47,2 |
+
+Nos diagnósticos, o tempo de execução de `cadeira` passou de 18,101 para 2,826 ms, e o de `modelo 12` passou de 15,460 para 2,037 ms. O plano passou da varredura sequencial para o uso do índice nos dois termos. O GIN ocupou 1.171.456 bytes. [Sem GIN](diagnostico/15-busca-produtos-sem-gin.txt) · [Com GIN](diagnostico/16-busca-produtos-com-gin.txt)
+
 
 ## Fontes técnicas abertas
 
