@@ -157,6 +157,6 @@ Kalibera e Jones (2013) usam repetições para quantificar a variação. A escol
 
 ## 9. Uso de IA
 
-O ChatGPT e o Gemini apoiaram a formulação de string de busca no Google Acadêmico, a interpretação dos planos SQL e a redação do artigo. O ChatGPT também auxiliou na reescrita da consulta do ranking e na elaboração do [script em Python com Matplotlib](gerar_figuras.py), usado para gerar as figuras a partir de `resultados/`.
+O ChatGPT e o Gemini apoiaram a formulação de string de busca no Google Acadêmico, a interpretação dos planos SQL e a redação do artigo. O ChatGPT também auxiliou na reescrita da consulta do ranking e na elaboração do [script em Python com Matplotlib](gerar_figuras.py), usado para gerar os dois gráficos a partir de `resultados/`.
 
 As fontes foram conferidas nos originais de forma manual. As mudanças da API foram verificadas com o contrato e os testes de carga. Os números do artigo e das figuras foram conferidos nos arquivos de `resultados/`.
