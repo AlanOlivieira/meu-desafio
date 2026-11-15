@@ -1,0 +1,17 @@
+Medição: 11-referencia-otimizada-20vus
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        430
+Requisições/s:      6.82
+Tempo de resposta:  mediana 1691.2 ms | p95 9033.9 ms | p99 17448.5 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               115       97.6 ms       399.6 ms      698.8 ms      0.0%    
+cliente-por-email     60        2372.1 ms     4051.6 ms     4867.1 ms     0.0%    
+pedidos-do-cliente    91        6404.2 ms     10233.6 ms    11120.4 ms    0.0%    
+pedidos-por-status    58        1835.5 ms     10085.1 ms    12704.3 ms    0.0%    
+busca-produtos        72        995.2 ms      2144.9 ms     3482.9 ms     0.0%    
+vendas-por-dia        29        3909.7 ms     9080.0 ms     12209.5 ms    0.0%    
+top-produtos          5         20484.5 ms    28753.7 ms    29343.0 ms    0.0%    

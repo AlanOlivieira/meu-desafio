@@ -1,0 +1,17 @@
+Medição: 12-cota-api-04-20vus
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        432
+Requisições/s:      6.81
+Tempo de resposta:  mediana 1613.1 ms | p95 9244.1 ms | p99 16377.6 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               117       98.6 ms       422.5 ms      610.0 ms      0.0%    
+cliente-por-email     62        2476.1 ms     4794.5 ms     5604.8 ms     0.0%    
+pedidos-do-cliente    86        6133.7 ms     11372.6 ms    12377.1 ms    0.0%    
+pedidos-por-status    64        1956.5 ms     6388.7 ms     9772.5 ms     0.0%    
+busca-produtos        70        996.2 ms      2056.5 ms     2330.7 ms     0.0%    
+vendas-por-dia        28        3346.7 ms     6313.8 ms     9172.3 ms     0.0%    
+top-produtos          5         32295.6 ms    37753.6 ms    38564.2 ms    0.0%    

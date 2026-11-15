@@ -1,0 +1,5 @@
+container                            amostras  cpu_media    cpu_max    mem_media      mem_max
+t4h-20261114-215129-cota-banco-1           35      95.4%      99.2%    427.5 MiB    470.0 MiB
+t4h-20261114-215129-cota-api-1             35      21.7%       8.7%     48.7 MiB     77.5 MiB
+
+cpu_percentual: 100% = 1 CPU inteira.

@@ -1,0 +1,17 @@
+Medição: 11-gin-produtos-20vus
+Carga: 20 usuários virtuais por 60s
+
+Requisições:        401
+Requisições/s:      6.45
+Tempo de resposta:  mediana 1493.6 ms | p95 10282.6 ms | p99 22060.4 ms
+Erros:              0.00%
+
+Por rota:
+rota                  req       mediana       p95           p99           erros   
+cliente               105       97.9 ms       405.8 ms      714.4 ms      0.0%    
+cliente-por-email     61        2823.5 ms     4747.9 ms     5207.8 ms     0.0%    
+pedidos-do-cliente    81        7303.9 ms     11390.9 ms    12039.1 ms    0.0%    
+pedidos-por-status    57        2002.6 ms     10627.9 ms    12611.0 ms    0.0%    
+busca-produtos        65        201.9 ms      706.4 ms      1117.5 ms     0.0%    
+vendas-por-dia        27        4121.1 ms     8578.8 ms     9580.2 ms     0.0%    
+top-produtos          5         22702.3 ms    33583.7 ms    35186.2 ms    0.0%    

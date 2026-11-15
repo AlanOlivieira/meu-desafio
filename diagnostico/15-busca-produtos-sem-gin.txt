@@ -1,0 +1,34 @@
+                                                       QUERY PLAN                                                       
+------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=466.88..466.93 rows=20 width=44) (actual time=18.015..18.021 rows=20 loops=1)
+   Buffers: shared hit=196
+   ->  Sort  (cost=466.88..469.40 rows=1010 width=44) (actual time=18.014..18.016 rows=20 loops=1)
+         Sort Key: nome, id
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=196
+         ->  Seq Scan on produtos  (cost=0.00..440.00 rows=1010 width=44) (actual time=0.032..17.326 rows=1000 loops=1)
+               Filter: (nome ~~* '%cadeira%'::text)
+               Rows Removed by Filter: 19000
+               Buffers: shared hit=190
+ Planning:
+   Buffers: shared hit=73 read=10
+ Planning Time: 2.368 ms
+ Execution Time: 18.101 ms
+(14 rows)
+
+                                                     QUERY PLAN                                                      
+---------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=440.01..440.01 rows=2 width=44) (actual time=15.437..15.441 rows=20 loops=1)
+   Buffers: shared hit=190
+   ->  Sort  (cost=440.01..440.01 rows=2 width=44) (actual time=15.436..15.437 rows=20 loops=1)
+         Sort Key: nome, id
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=190
+         ->  Seq Scan on produtos  (cost=0.00..440.00 rows=2 width=44) (actual time=0.027..15.144 rows=1111 loops=1)
+               Filter: (nome ~~* '%modelo 12%'::text)
+               Rows Removed by Filter: 18889
+               Buffers: shared hit=190
+ Planning Time: 0.221 ms
+ Execution Time: 15.460 ms
+(12 rows)
+

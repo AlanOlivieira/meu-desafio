@@ -1,0 +1,5 @@
+container                            amostras  cpu_media    cpu_max    mem_media      mem_max
+t4h-20261114-215129-gin-banco-1            36      97.2%      99.7%    322.7 MiB    430.3 MiB
+t4h-20261114-215129-gin-api-1              36      21.7%       9.5%     45.0 MiB     58.5 MiB
+
+cpu_percentual: 100% = 1 CPU inteira.
